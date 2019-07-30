@@ -108,6 +108,9 @@ const notepad = {
   },
 };
 
+/*
+ * Добавляю 4 заметки и смотрю что получилось
+ */
 notepad.saveNote({
   id: 'id-1',
   title: 'JavaScript essentials',
@@ -118,9 +121,9 @@ notepad.saveNote({
 
 notepad.saveNote({
   id: 'id-2',
-  title: ' JavaScript Refresh HTML and CSS',
+  title: 'Refresh HTML and CSS',
   body:
-    ' Need to refresh HTML and CSS concepts, after learning some JavaScript. Maybe get to know CSS Grid and PostCSS, they seem to be trending.',
+    'Need to refresh HTML and CSS concepts, after learning some JavaScript. Maybe get to know CSS Grid and PostCSS, they seem to be trending.',
   priority: Priority.NORMAL,
 });
 
@@ -140,16 +143,66 @@ notepad.saveNote({
   priority: Priority.LOW,
 });
 
-// console.log(
-//   'Отфильтровали заметки по ключевому слову "Winter": ',
-//   notepad.filterNotesByQuery('Winter'),
-// );
+console.log('Все текущие заметки: ', notepad.getNotes());
+
+/*
+ * Зима уже близко, пора поднять приоритет на покупку одежды
+ */
+notepad.updateNotePriority('id-4', Priority.NORMAL);
 
 console.log(
-  'Отфильтровали заметки по ключевому слову "JavaScript": ',
-  notepad.filterNotesByQuery('JavaScript'),
+  'Заметки после обновления приоритета для id-4: ',
+  notepad.getNotes(),
 );
-// console.log(
-//   'Отфильтровали заметки по нормальному приоритету: ',
-//   notepad.filterNotesByPriority(Priority.NORMAL),
-// );
+
+/*
+ * Решил что фреймворки отложу немного, понижаю приоритет
+ */
+notepad.updateNotePriority('id-3', Priority.LOW);
+
+console.log(
+  'Заметки после обновления приоритета для id-3: ',
+  notepad.getNotes(),
+);
+
+/*
+ * Решил отфильтровать заметки по слову html
+ */
+console.log(
+  'Отфильтровали заметки по ключевому слову "html": ',
+  notepad.filterNotesByQuery('html'),
+);
+
+/*
+ * Решил отфильтровать заметки по слову javascript
+ */
+console.log(
+  'Отфильтровали заметки по ключевому слову "javascript": ',
+  notepad.filterNotesByQuery('javascript'),
+);
+
+/*
+ * Хочу посмотреть только заметки с нормальным приоритетом
+ */
+console.log(
+  'Отфильтровали заметки по нормальному приоритету: ',
+  notepad.filterNotesByPriority(Priority.NORMAL),
+);
+
+/*
+ * Обновим контент заметки с id-3
+ */
+notepad.updateNoteContent('id-3', {
+  title: 'Get comfy with React.js or Vue.js',
+});
+
+console.log(
+  'Заметки после обновления контента заметки с id-3: ',
+  notepad.getNotes(),
+);
+
+/*
+ * Повторил HTML и CSS, удаляю запись c id-2
+ */
+notepad.deleteNote('id-2');
+console.log('Заметки после удаления с id -2: ', notepad.getNotes());
